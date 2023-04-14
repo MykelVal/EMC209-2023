@@ -7,10 +7,15 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private Transform _spawnLocation;
     private static GameObject localPlayer;
+
+    [SerializeField] private GameObject _playerPrefab;
     
     // Start is called before the first frame update
     void Start()
     {
         PhotonNetwork.Instantiate("Characters/Player", _spawnLocation.position, Quaternion.identity);
+        
+        //for debugging
+        //Instantiate(_playerPrefab, _spawnLocation.position, Quaternion.identity);
     }
 }

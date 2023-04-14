@@ -26,8 +26,10 @@ public class CreateRoomPanel : MonoBehaviour
 
     private void CreateRoom()
     {
+        //checks if player has enough energy to create a room
         if (_currencyManager.HasEnoughEnergy(1))
         {
+            //checks if theres a room name
             if (!string.IsNullOrEmpty(_roomName.text))
             {
                 PhotonNetwork.CreateRoom(_roomName.text, new RoomOptions() { MaxPlayers = 4 });
