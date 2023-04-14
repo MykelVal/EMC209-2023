@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class LoginPanel : MonoBehaviour
 {
@@ -34,5 +35,7 @@ public class LoginPanel : MonoBehaviour
         LoginEvent?.Invoke(_userName.text, _password.text);
 
         _password.text = "";
+
+        SceneManager.LoadScene(1);
     }
 }

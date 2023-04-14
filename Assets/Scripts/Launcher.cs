@@ -52,6 +52,8 @@ namespace Photon.Pun.Demo.PunBasics
 		[SerializeField] private CreateRoomPanel _createRoomPanel;
 		[SerializeField] private InRoomPanel _inRoomPanel;
 
+		[SerializeField] private CurrencyManager _currencyManager;
+
 		#endregion
 
 		#region Private Fields
@@ -231,7 +233,15 @@ namespace Photon.Pun.Demo.PunBasics
 		        if (roomList[i].RemovedFromList || !roomList[i].IsVisible || !roomList[i].IsOpen) continue;
 		        
 		        _roomContainerList[i].gameObject.SetActive(true);
-		        _roomContainerList[i].UpdateRoomInfo(roomList[i]);
+                if (_currencyManager.HasEnoughEnergy(1))
+                {
+					_roomContainerList[i].UpdateRoomInfo(roomList[i]);
+				}
+                else
+                {
+					Debug.Log("Insufficient Energy");
+                }
+		        
 	        }
         }
 

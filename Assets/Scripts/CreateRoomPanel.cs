@@ -11,6 +11,8 @@ public class CreateRoomPanel : MonoBehaviour
     [SerializeField] private InputField _roomName;
     [SerializeField] private Button _createBtn;
 
+    [SerializeField] private CurrencyManager _currencyManager;
+
     private void OnEnable()
     {
         _createBtn.onClick.AddListener(CreateRoom);        
@@ -24,9 +26,17 @@ public class CreateRoomPanel : MonoBehaviour
 
     private void CreateRoom()
     {
-        if (!string.IsNullOrEmpty(_roomName.text))
+        if (_currencyManager.HasEnoughEnergy(1))
         {
-            PhotonNetwork.CreateRoom(_roomName.text, new RoomOptions() {MaxPlayers = 4});
+            if (!string.IsNullOrEmpty(_roomName.text))
+            {
+                PhotonNetwork.CreateRoom(_roomName.text, new RoomOptions() { MaxPlayers = 4 });
+            }
         }
+        else
+        {
+            Debug.Log("Not enough energy");
+        }
+        
     }
 }
