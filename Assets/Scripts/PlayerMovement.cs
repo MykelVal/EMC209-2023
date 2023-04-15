@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviourPun
     [SerializeField]private float _gravity = 0.1f;
     [SerializeField] private float _rayDistance = 1.2f;
     [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] private float _jumpForce = 10f;
+
+    [SerializeField] private Rigidbody2D _rb;
     
     [SerializeField] private List<Color> _playerAssignmentColors;
 
@@ -29,8 +32,38 @@ public class PlayerMovement : MonoBehaviourPun
     private void Update()
     {
         if (!photonView.IsMine) return;
-        
-        Gravity();
+
+        // Get the horizontal and vertical input axis values
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+
+        // Create a Vector2 to represent the movement direction
+        Vector2 movement = new Vector2(moveHorizontal, moveVertical);
+
+        // Apply the movement to the Rigidbody component
+        _rb.velocity = movement * _moveSpeed;
+
+        /*if (Input.GetKey(KeyCode.W))
+        {
+            transform.position += new Vector3(0f, _moveSpeed * Time.deltaTime, 0f);
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.position -= new Vector3(0f, _moveSpeed * Time.deltaTime, 0f);
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.position += new Vector3(_moveSpeed * Time.deltaTime, 0f, 0f);
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.position -= new Vector3(_moveSpeed * Time.deltaTime, 0f, 0f);
+        }*/
+
+        /*Gravity();
         var horInput = Input.GetAxis("Horizontal");
         var speedMath = horInput * Time.deltaTime * _moveSpeed;
         if (horInput == 0) return;
@@ -43,6 +76,7 @@ public class PlayerMovement : MonoBehaviourPun
         {
             Debug.Log("I'm pressing space");
             photonView.RPC(nameof(MessageTest), RpcTarget.All, photonView.Controller.NickName);
+            transform.position += new Vector3(0f, _jumpForce * Time.deltaTime, 0f);
         }
     }
 
@@ -64,6 +98,6 @@ public class PlayerMovement : MonoBehaviourPun
     [PunRPC]
     private void MessageTest(string playerName)
     {
-        Debug.Log($"{playerName}:Are you ok?");
+        Debug.Log($"{playerName}:Are you ok?");*/
     }
 }

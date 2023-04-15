@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RegistrationPanel : MonoBehaviour
 {
@@ -45,6 +46,8 @@ public class RegistrationPanel : MonoBehaviour
 
         _password.text = "";
         _retypePassword.text = "";
+
+        SceneManager.LoadScene(1);
     }
 
 }

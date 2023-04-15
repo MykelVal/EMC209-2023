@@ -7,22 +7,45 @@ using UnityEngine;
 
 public class CurrencyManager : MonoBehaviour
 {
-    private int _hpAmount;
-    private int _vbAmount;
+    public int _egAmount;
+    public int _goAmount;
     
     public void Init(string currencyCode, int balance) 
     { 
         switch (currencyCode)
         {
-            case "VB":
-                
-                _vbAmount = balance;
+            case "GO":
+                _goAmount = balance;
                 break;
-            case "HP":
-                _hpAmount = balance;
+            case "EG":
+                _egAmount = balance;
                 break;
         }
 
+    }
+    private void Start()
+    {
+        // Get the current player's currency balances from PlayFab
+        GetCurrencyBalances();
+    }
+
+    /*private void Update()
+    {
+        // Get the current player's currency balances from PlayFab
+        GetCurrencyBalances();
+    }*/
+
+    public void GetCurrencyBalances()
+    {
+        // Call the PlayFab API to get the player's currency balances
+        PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest(), OnGetCurrencyBalances, OnFailedModifyCurrency);
+    }
+
+    private void OnGetCurrencyBalances(GetUserInventoryResult result)
+    {
+        // Update the local currency balances
+        _egAmount = result.VirtualCurrency["EG"];
+        _goAmount = result.VirtualCurrency["GO"];
     }
 
     public void AddCurrency(VirtualCurrency virtualCurrency, int amountToAdd)
@@ -47,18 +70,24 @@ public class CurrencyManager : MonoBehaviour
     {
           switch (result.VirtualCurrency)
         {
-            case "VB":
+            case "GO":
                 
-                _vbAmount = result.Balance;
-                Debug.Log($"VB:{_vbAmount}");
+                _goAmount = result.Balance;
+                Debug.Log($"GO:{_goAmount}");
                 break;
-            case "HP":
-                _hpAmount = result.Balance;
-                Debug.Log($"HP:{_hpAmount}");
+            case "EG":
+                _egAmount = result.Balance;
+                Debug.Log($"EG:{_egAmount}");
                 break;
         }
 
             
+    }
+    public bool HasEnoughEnergy(int amount)
+    {
+        // Check if the player has enough energy to play
+        Debug.Log($"EG: {_egAmount}, Required: {amount} ");
+        return _egAmount >= amount;
     }
 
     private void OnFailedModifyCurrency(PlayFabError error)
@@ -68,14 +97,14 @@ public class CurrencyManager : MonoBehaviour
 
     public enum VirtualCurrency
     {
-        HP,
-        VB
+        EG,
+        GO
     }
 
     [ContextMenu("Test Add and Subtract")]
-    private void TestSubtract()
+    public void TestSubtract()
     {
-        AddCurrency(VirtualCurrency.VB, 1000);
-        SubtractCurrency(VirtualCurrency.HP, 1);
+        AddCurrency(VirtualCurrency.GO, 1000);
+        SubtractCurrency(VirtualCurrency.EG, 1);
     }
 }
