@@ -49,7 +49,6 @@ public class AuthenticationManager : MonoBehaviour
                     Debug.Log("Successfully Logged in");                    
                     if (loginResult.InfoResultPayload != null)
                     {
-
                         InitializeConfigValues(loginResult.InfoResultPayload);
                     }
                     else
@@ -57,7 +56,7 @@ public class AuthenticationManager : MonoBehaviour
                         Debug.LogError("Info Result Payload is null");
                     }
                     PhotonNetwork.NickName = userName;
-                    //SceneManager.LoadScene("PunBasics-Launcher");
+                    SceneManager.LoadScene("PunBasics-Launcher");
                 },(error) => {
                     Debug.LogError($"Failed to login: {error.ErrorMessage}");
                 }
@@ -141,6 +140,11 @@ public class AuthenticationManager : MonoBehaviour
         }
     }
 
-    
-    
+    private void OnLoginSuccess(LoginResult result)
+    {
+        Debug.Log("Player logged in successfully!");
+
+        // Trigger other events or perform actions here
+    }
+
 }

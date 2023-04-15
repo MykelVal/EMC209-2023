@@ -35,7 +35,5 @@ public class LoginPanel : MonoBehaviour
         LoginEvent?.Invoke(_userName.text, _password.text);
 
         _password.text = "";
-
-        SceneManager.LoadScene(1);
     }
 }

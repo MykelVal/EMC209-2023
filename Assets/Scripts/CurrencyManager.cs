@@ -29,11 +29,11 @@ public class CurrencyManager : MonoBehaviour
         GetCurrencyBalances();
     }
 
-    private void Update()
+    /*private void Update()
     {
         // Get the current player's currency balances from PlayFab
         GetCurrencyBalances();
-    }
+    }*/
 
     public void GetCurrencyBalances()
     {
