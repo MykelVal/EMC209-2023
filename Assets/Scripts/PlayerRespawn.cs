@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class PlayerRespawn : MonoBehaviour
 {
-    [SerializeField] private Transform _spawnLocation;
+    private Transform _spawnLocation;
+    private GameObject _spawnObject;
+
+    private void Start()
+    {
+        _spawnObject = GameObject.Find("Spawn");
+        _spawnLocation = _spawnObject.GetComponent<Transform>();
+    }
+
     public void Respawn(Transform playerLocation)
     {
-        playerLocation = _spawnLocation;
+        playerLocation.position = _spawnLocation.position;
     }
 }
