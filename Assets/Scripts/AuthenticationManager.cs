@@ -4,11 +4,18 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
+using Photon.Pun;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class AuthenticationManager : MonoBehaviour
 {
     [SerializeField] private LoginPanel _login;
     [SerializeField] private RegistrationPanel _registration;
+    [SerializeField] private GameObject _errorPanel;
+    [SerializeField] private Text _errorText;
+
+    public string PlayFabId { get; private set; }
 
     private void OnEnable()
     {
@@ -34,8 +41,12 @@ public class AuthenticationManager : MonoBehaviour
                     
                 },(loginResult) => {
                     Debug.Log("Successfully Logged in");
+                    PhotonNetwork.NickName = userName;
+                    SceneManager.LoadScene(1);
                 },(error) => {
                     Debug.LogError($"Failed to login: {error.ErrorMessage}");
+                    _errorPanel.SetActive(true);
+                    _errorText.text = $"Failed to login: {error.ErrorMessage}";
                 }
             );
     }
@@ -70,12 +81,21 @@ public class AuthenticationManager : MonoBehaviour
                             }
                         }
                         Debug.LogError($"Failed to Register: {updateFail.Error}\n {updateFail.ErrorMessage} \n {msg}");
-                    });
+                    _errorPanel.SetActive(true);
+                    _errorText.text = $"Failed to Register: {updateFail.Error}\n {updateFail.ErrorMessage} \n {msg}";
+            });
 
             }, (loginFailure) =>
             {
                 Debug.LogError($"Unable to Login with custom Id: {loginFailure.ErrorMessage}");
             });
     }
-    
+
+    private void InitializeConfigValues(GetPlayerCombinedInfoResultPayload payload)
+    {
+        if (payload.AccountInfo != null)
+        {
+            PlayFabId = payload.AccountInfo.PlayFabId;
+        }
+    }
 }

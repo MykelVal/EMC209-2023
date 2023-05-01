@@ -102,6 +102,7 @@ namespace Photon.Pun.Demo.PunBasics
 				_roomContainerList.Add(container);
 				container.gameObject.SetActive(false);
 			}
+			Connect();
 		}
 
 		#endregion

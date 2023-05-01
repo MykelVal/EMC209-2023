@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d0199c11aa6f514784c5c69cd8378d8, type: 3}
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
-  DevAccountEmail: v-2jooro@outlook.com
-  DevAccountToken: jwshdmrz5tmh74ab4wh4agr3myu6gaesk93w5oy8wxaykak1o3trmfwn76zmj7jmrcqp57prwnmub9ngtzrb8uz7j3w48o9b8kjt37kg4do19tqtwdijxeiuxurib8zo9hq8i9wxfeofrsxch31poz7wccws4buyso5dqae8ebiodhkcy5gajpttiypdho5e9wg686f8
+  DevAccountEmail: mikmik.valencia@yahoo.com
+  DevAccountToken: 56wb96w4kn3qamqmr7x1ktrrsabgo5z47k74nk1c8qx87d4h3o3tamii5j8bkq8jh5izqisw9pptbyzjhd7ymb36fxwgnm5hc8uoghp8b5u9gyzbtrjhtwpwdydbymdhgd3nuk7jbpuy4mkqen7cfb1yqqn46r1czm9451fz41dntuqrwf551wskdmpatbuitke4jrik
   AadAuthorization: 
-  SelectedStudio: Taktyl Test
+  SelectedStudio: 
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 1
+  curMainMenuIdx: 0
   curSubMenuIdx: 0
